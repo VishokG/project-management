@@ -58,3 +58,21 @@ export const priorityBorderMap: Record<string, string> = {
   medium: 'border-yellow-300',
   low: 'border-green-300',
 };
+
+export function filterAndSortAssignees(
+  assignees: Assignee[],
+  selected: Assignee[],
+  search: string
+): { filtered: Assignee[]; sorted: Assignee[] } {
+  const filtered = assignees.filter((a) => a.name.toLowerCase().includes(search.toLowerCase()));
+  const sorted = [
+    ...filtered.filter((a) => selected.some((s) => s.id === a.id)),
+    ...filtered.filter((a) => !selected.some((s) => s.id === a.id)),
+  ];
+  return { filtered, sorted };
+}
+
+// Utility: Get display name for assignee (truncate if needed)
+export function getDisplayName(name: string): string {
+  return name.length > 16 ? name.slice(0, 13) + '...' : name;
+}
