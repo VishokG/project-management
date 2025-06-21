@@ -60,6 +60,14 @@ const Tasks = () => {
     setShowModal(false);
   };
 
+  const handleDeleteTask = () => {
+    if (editTask && editTask.id !== undefined) {
+      setTasks((prev) => prev.filter((t) => t.id !== editTask.id));
+      setShowModal(false);
+      setEditTask(null);
+    }
+  };
+
   // Mimic data fetching
   useEffect(() => {
     setLoading(true);
@@ -96,6 +104,7 @@ const Tasks = () => {
         initialData={editTask || {}}
         onSave={handleSaveTask}
         assigneeOptions={assignees}
+        onDelete={modalMode === 'edit' ? handleDeleteTask : undefined}
       />
       <div className="flex flex-col mb-6">
         <h1 className="text-2xl font-bold mb-2">Task Manager</h1>

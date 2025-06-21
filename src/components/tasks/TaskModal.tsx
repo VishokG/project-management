@@ -114,9 +114,10 @@ type TaskModalProps = {
   initialData?: Partial<Task>;
   onSave: (task: Partial<Task>) => void;
   assigneeOptions: Assignee[];
+  onDelete?: () => void; // Optional delete handler
 };
 
-const TaskModal: React.FC<TaskModalProps> = ({ open, onClose, mode = 'add', initialData = {}, onSave, assigneeOptions }) => {
+const TaskModal: React.FC<TaskModalProps> = ({ open, onClose, mode = 'add', initialData = {}, onSave, assigneeOptions, onDelete }) => {
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [status, setStatus] = useState<TaskStatus>(TaskStatus.Todo);
@@ -124,6 +125,7 @@ const TaskModal: React.FC<TaskModalProps> = ({ open, onClose, mode = 'add', init
   const [assignees, setAssignees] = useState<Assignee[]>([]);
   const [dueDate, setDueDate] = useState<string>(new Date(Date.now() + 86400000).toISOString().slice(0, 10));
   const [tags, setTags] = useState<Tag[]>([]);
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   const handleTagChange = (tag: Tag) => {
     setTags((prev: Tag[]) =>
@@ -162,6 +164,7 @@ const TaskModal: React.FC<TaskModalProps> = ({ open, onClose, mode = 'add', init
     setAssignees(initialData.assignees || []);
     setDueDate(initialData.dueDate || new Date(Date.now() + 86400000).toISOString().slice(0, 10));
     setTags((initialData.tags as Tag[]) || []);
+    setConfirmDelete(false); // Reset confirmDelete when modal/task changes
   }, [initialData, open]);
 
   if (!open) return null;
@@ -252,12 +255,36 @@ const TaskModal: React.FC<TaskModalProps> = ({ open, onClose, mode = 'add', init
             <TagSelector tags={tagOptions} selected={tags} onChange={handleTagChange} />
           </div>
           <div className="flex justify-end gap-2">
-            <Button type="button" variant="secondary" onClick={onClose}>
-              Cancel
-            </Button>
-            <Button type="submit" variant="primary">
-              Save
-            </Button>
+            {confirmDelete ? (
+              <>
+                <span className="flex items-center mr-4 font-medium text-red-600">Are you sure?</span>
+                <Button type="button" variant="danger" className="bg-red-500 hover:bg-red-600 text-white border-red-500" onClick={onDelete}>
+                  Yes
+                </Button>
+                <Button type="button" variant="secondary" onClick={() => setConfirmDelete(false)}>
+                  No
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button type="button" variant="secondary" onClick={onClose}>
+                  Cancel
+                </Button>
+                {mode === 'edit' && onDelete && (
+                  <Button
+                    type="button"
+                    variant="danger"
+                    className="bg-red-500 hover:bg-red-600 text-white border-red-500"
+                    onClick={() => setConfirmDelete(true)}
+                  >
+                    Delete
+                  </Button>
+                )}
+                <Button type="submit" variant="primary">
+                  Save
+                </Button>
+              </>
+            )}
           </div>
         </form>
       </div>
