@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Task, Assignee, TaskStatus, TaskPriority, Tag } from './types';
+import { Task, Assignee, TaskStatus, TaskPriority, Tag } from '../../types/tasks';
 import { Button } from '../ui/Button';
 import { tagOptions } from './data';
 import { filterAndSortAssignees, getDisplayName } from './utils';

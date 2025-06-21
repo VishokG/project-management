@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dropdown, DropdownOption } from '../../components/ui/Dropdown';
-import { Task, TaskPriority } from './types';
+import { Task, TaskPriority } from '../../types/tasks';
 
 export enum TasksSortOption {
   DateAsc = 'date-asc',

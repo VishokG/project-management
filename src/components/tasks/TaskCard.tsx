@@ -1,5 +1,5 @@
 import React from 'react';
-import { Task, Tag, TaskPriority } from './types';
+import { Task, Tag, TaskPriority } from '../../types/tasks';
 import { getAssigneeColor, getPriorityTitle, tagClassMap, priorityClassMap, tagBorderMap, priorityBorderMap } from './utils';
 
 type TaskCardProps = {

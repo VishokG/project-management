@@ -1,4 +1,4 @@
-import { Tag, Assignee, TaskStatus, TaskPriority } from './types';
+import { Tag, Assignee, TaskStatus, TaskPriority } from '../../types/tasks';
 
 // Assign a consistent color to each assignee based on their id
 export function getAssigneeColor(id: string) {

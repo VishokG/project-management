@@ -1,4 +1,4 @@
-import { Assignee, Task, Tag, TaskStatus, TaskPriority } from './types';
+import { Assignee, Task, Tag, TaskStatus, TaskPriority } from '../../types/tasks';
 
 export const tagOptions = [
   Tag.Design,
