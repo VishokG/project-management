@@ -15,6 +15,13 @@ export enum TaskPriority {
   High = 'high',
 }
 
+export enum TasksSortOption {
+  DateAsc = 'date-asc',
+  DateDesc = 'date-desc',
+  PriorityAsc = 'priority-asc',
+  PriorityDesc = 'priority-desc',
+}
+
 export interface Task {
   id: number;
   title: string;
