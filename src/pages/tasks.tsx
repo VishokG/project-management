@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import TaskModal from '../components/tasks/TaskModal';
 import TaskColumn from '../components/tasks/TaskColumn';
-import { Task, TaskStatus } from '../types/tasks';
+import { Task, TasksSortOption, TaskStatus } from '../types/tasks';
 import { Button } from '../components/ui/Button';
-import { TasksSortDropdown, sortTasks, TasksSortOption } from '../components/tasks/TasksSortDropdown';
+import { TasksSortDropdown, sortTasks } from '../components/tasks/TasksSortDropdown';
 import { initialTasks, assignees } from '../components/tasks/data';
 import { getStatusKeys, getStatusTitle } from '../components/tasks/utils';
 
