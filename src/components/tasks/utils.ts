@@ -19,19 +19,6 @@ export function getAssigneeColor(id: string) {
   return assigneeColors[hash % assigneeColors.length];
 }
 
-export function getTagColor(tag: string | Tag) {
-  const tagKey = typeof tag === 'string' ? tag.toLowerCase() : tag;
-  const colorMap: Record<string, string> = {
-    [Tag.Design]: 'bg-purple-100 text-purple-700',
-    [Tag.Dev]: 'bg-blue-100 text-blue-700',
-    [Tag.Marketing]: 'bg-yellow-100 text-yellow-700',
-    [Tag.Bug]: 'bg-red-100 text-red-700',
-    [Tag.Business]: 'bg-gray-100 text-gray-700',
-    [Tag.Legal]: 'bg-indigo-100 text-indigo-700',
-  };
-  return colorMap[tagKey] || 'bg-gray-100 text-gray-700';
-}
-
 const priorityTitleMap: Record<TaskPriority, string> = {
   [TaskPriority.Low]: 'Low',
   [TaskPriority.Medium]: 'Medium',
@@ -42,25 +29,32 @@ export function getPriorityTitle(priority: TaskPriority): string {
   return priorityTitleMap[priority] || priority;
 }
 
-const priorityColorMap: Record<TaskPriority, string> = {
-  [TaskPriority.High]: 'bg-red-100 text-red-700',
-  [TaskPriority.Medium]: 'bg-yellow-100 text-yellow-700',
-  [TaskPriority.Low]: 'bg-green-100 text-green-700',
+export const tagClassMap: Record<string, string> = {
+  design: 'bg-purple-100 text-purple-700',
+  dev: 'bg-blue-100 text-blue-700',
+  marketing: 'bg-yellow-100 text-yellow-700',
+  bug: 'bg-red-100 text-red-700',
+  business: 'bg-gray-100 text-gray-700',
+  legal: 'bg-indigo-100 text-indigo-700',
 };
 
-export function getPriorityColor(priority: TaskPriority): string {
-  return priorityColorMap[priority] || 'bg-gray-100 text-gray-700';
-}
+export const priorityClassMap: Record<string, string> = {
+  high: 'bg-red-100 text-red-700',
+  medium: 'bg-yellow-100 text-yellow-700',
+  low: 'bg-green-100 text-green-700',
+};
 
-export function getPriorityBarColor(priority: TaskPriority): string {
-  switch (priority) {
-    case TaskPriority.High:
-      return 'bg-red-500';
-    case TaskPriority.Low:
-      return 'bg-green-500';
-    case TaskPriority.Medium:
-      return 'bg-yellow-400';
-    default:
-      return 'bg-gray-400';
-  }
-}
+export const tagBorderMap: Record<string, string> = {
+  design: 'border-purple-300',
+  dev: 'border-blue-300',
+  marketing: 'border-yellow-300',
+  bug: 'border-red-300',
+  business: 'border-gray-300',
+  legal: 'border-indigo-300',
+};
+
+export const priorityBorderMap: Record<string, string> = {
+  high: 'border-red-300',
+  medium: 'border-yellow-300',
+  low: 'border-green-300',
+};
