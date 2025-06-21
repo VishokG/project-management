@@ -76,3 +76,18 @@ export function filterAndSortAssignees(
 export function getDisplayName(name: string): string {
   return name.length > 16 ? name.slice(0, 13) + '...' : name;
 }
+
+// Utility: Get status display title
+const statusTitleMap: Record<TaskStatus, string> = {
+  [TaskStatus.Todo]: 'To Do',
+  [TaskStatus.InProgress]: 'In Progress',
+  [TaskStatus.Completed]: 'Completed',
+};
+
+export function getStatusTitle(status: TaskStatus): string {
+  return statusTitleMap[status] || status;
+}
+
+export function getStatusKeys(): TaskStatus[] {
+  return Object.keys(statusTitleMap) as TaskStatus[];
+}
